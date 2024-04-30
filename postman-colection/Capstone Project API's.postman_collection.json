@@ -32,6 +32,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"country\":\"us\",\n  \"pageSize\": 3,\n  \"q\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:4000/news",
 							"protocol": "http",
@@ -75,6 +84,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n{\n\"queryName\": \"query01\",\n\"language\": \"en\",\n\"pageSize\": 10,\n\"q\": \"news\"\n},\n{\n\"queryName\": \"query02\",\n\"language\": \"en\",\n\"pageSize\": 10,\n\"q\": \"build\"\n},\n{\n\"queryName\": \"query03\",\n\"language\": \"es\",\n\"pageSize\": 10,\n\"q\": \"sports\"\n}\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:4000/queries",
 							"protocol": "http",
@@ -118,15 +136,25 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"user\": \"admin\",\n\"password\": \"admxin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:4000/users",
+							"raw": "http://localhost:4000/users/authenticate",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
-								"users"
+								"users",
+								"authenticate"
 							]
 						}
 					},
