@@ -14,12 +14,25 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const queryArray = req.body;
-    const data = JSON.stringify(queryArray, null, 2);
+    
     try {
+        // Getting the data from the file.
+        const currentData = fs.readFileSync('queries.json', 'utf8');
+        const queryArray = req.body;
+        let data;
+        // check is exits any queries recorded into the queries.json file.
+        if(currentData.length === 0){
+            data = JSON.stringify(queryArray, null, 2);
+        }else{
+            // merging the existing data from the file and the data from the Request body
+            const jsonArrayFromFile = JSON.parse(currentData);
+            const mergedJSON = [...queryArray, ...jsonArrayFromFile];
+            data = JSON.stringify(mergedJSON, null, 2);
+        }
+        // Save the queries info into the file
         fs.writeFileSync('queries.json', data);
         console.log('query array saved to queries.json');
-        res.status(200).send("query array saved");
+        res.status(200).send("query array saved" + data);
     } catch (err) {
         console.error(err);
         res.status(500).send(err);
