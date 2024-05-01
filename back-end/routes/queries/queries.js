@@ -39,4 +39,19 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Delete the queries file data
+router.delete('/', async (req, res) => {
+    
+    try {
+        // Save the queries info into the file
+        fs.writeFileSync('queries.json', '');
+        // fs.writeFile('/path/to/file', '')
+        console.log('query array saved to queries.json');
+        res.status(200).send("query list was delered");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send(err);
+    }
+});
+
 export default router;

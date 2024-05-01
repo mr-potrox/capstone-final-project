@@ -20,11 +20,13 @@ const baseUrl = 'https://newsapi.org/v2/top-headlines';
 function addApiKey(queryObject){
 	return {...queryObject, apiKey: apiKey}
 }
+
 router.get('/', async (req, res) => {
   let url = createUrlFromQueryObject(queryObject);
 	let newsArticles = await fetchData(url);
 	res.send(newsArticles);
 });
+
 
 router.post('/', async (req, res) => {
   let query = req.body;
@@ -34,15 +36,18 @@ router.post('/', async (req, res) => {
 	res.send(newsArticles);
 });
 
+//createUrlFromQueryObject this method create an URL with the correctstructure
 export function createUrlFromQueryObject(queryObjectWithApiKey) {
 	const queryString = new URLSearchParams(queryObjectWithApiKey).toString();
 	const url = baseUrl + "?" + queryString;
 	return url;
 }
 
+
 export async function fetchData(url) {
 	let data = null;
 	try {
+		//Getting the data form the endpiont.
 		const response = await fetch(url);
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
